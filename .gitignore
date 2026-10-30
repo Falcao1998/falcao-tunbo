@@ -1,0 +1,14 @@
+# Shopify CLI
+.shopify/
+
+# Hệ điều hành / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Khác
+node_modules/
+*.zip
+*.tgz
+*.log
