@@ -1,5 +1,11 @@
 # TUNBO
 
+## 1.1.0 — 2026-10-30
+
+- Header: store logo `falcao-logo-black.svg`, 60px desktop / 44px mobile.
+- Home: new hero copy — "Pro-grade clippers for barbers and home cuts", subtext, "Shop clippers" button.
+- Docs: WORKFLOW.md, release notes and AGENTS.md note in English; store permanent domain and repo URL.
+
 ## 1.0.0 — 2026-10-30
 
 - Initial fork of Horizon 4.3.0, renamed to TUNBO.
