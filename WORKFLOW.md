@@ -7,11 +7,12 @@ Technical conventions for the theme code live in `AGENTS.md`. This file covers t
 
 | Item | Value |
 |---|---|
-| Repo | github.com/falcao1998/falcao-tunbo (private) |
+| Repo | github.com/Falcao1998/falcao-tunbo (private) |
 | Branch `main` | the **live** theme on the store (Shopify GitHub integration, theme "falcao-tunbo/main") |
 | Branch `dev` | staging; connected as the unpublished theme "falcao-tunbo/dev" |
 | Local folder | ~/Desktop/falcao-tunbo |
-| Shopify CLI | `shopify theme dev` to preview locally, `shopify theme check` to lint |
+| Store | tunbo.shop (permanent domain: falca.myshopify.com — use this with the CLI) |
+| Shopify CLI | `shopify theme dev --store falca.myshopify.com` to preview locally, `shopify theme check` to lint |
 
 Never run `shopify theme push --live`. Deploying = `git push` to `main`.
 
@@ -20,7 +21,7 @@ Never run `shopify theme push --live`. Deploying = `git push` to `main`.
 ```bash
 git checkout dev
 git pull                                 # pick up Theme Editor commits and other changes
-shopify theme dev --store tunbo.shop     # edit with live preview
+shopify theme dev --store falca.myshopify.com     # edit with live preview
 shopify theme check                      # lint before committing
 git add -A
 git commit -m "feat(home): add lookbook section"
