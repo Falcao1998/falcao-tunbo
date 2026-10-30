@@ -1,62 +1,63 @@
-# TUNBO — Quy trình làm việc
+# TUNBO — Workflow
 
-Theme TUNBO cho store **tunbo.shop**, fork từ Shopify Horizon 4.3.0.
-Quy ước kỹ thuật của theme: xem `AGENTS.md`. File này mô tả quy trình phát hành.
+TUNBO theme for **tunbo.shop**, forked from Shopify Horizon 4.3.0.
+Technical conventions for the theme code live in `AGENTS.md`. This file covers the Git and release process.
 
-## Môi trường
+## Environment
 
-| Thành phần | Giá trị |
+| Item | Value |
 |---|---|
 | Repo | github.com/falcao1998/falcao-tunbo (private) |
-| Nhánh `main` | = theme **live** trên store (Shopify GitHub integration, theme "falcao-tunbo/main") |
-| Nhánh `dev` | thử nghiệm, kết nối thành theme unpublished "falcao-tunbo/dev" |
-| Folder local | ~/Desktop/falcao-tunbo |
-| Shopify CLI | `shopify theme dev` để xem trước, `shopify theme check` để lint |
+| Branch `main` | the **live** theme on the store (Shopify GitHub integration, theme "falcao-tunbo/main") |
+| Branch `dev` | staging; connected as the unpublished theme "falcao-tunbo/dev" |
+| Local folder | ~/Desktop/falcao-tunbo |
+| Shopify CLI | `shopify theme dev` to preview locally, `shopify theme check` to lint |
 
-Không dùng `shopify theme push --live`. Deploy = `git push` lên `main`.
+Never run `shopify theme push --live`. Deploying = `git push` to `main`.
 
-## Nhịp làm việc hằng ngày
+## Day-to-day
 
 ```bash
 git checkout dev
-git pull                         # lấy commit Theme Editor (nếu có) + thay đổi mới
-shopify theme dev --store tunbo.shop     # sửa và xem trực tiếp
-shopify theme check              # lint trước khi commit
+git pull                                 # pick up Theme Editor commits and other changes
+shopify theme dev --store tunbo.shop     # edit with live preview
+shopify theme check                      # lint before committing
 git add -A
-git commit -m "feat(home): thêm section lookbook"
-git push                         # theme falcao-tunbo/dev tự cập nhật → preview trong Admin
+git commit -m "feat(home): add lookbook section"
+git push                                 # falcao-tunbo/dev updates itself → preview in Admin
 ```
 
-## Phát hành một bản
+## Releasing
 
 ```bash
 git checkout main && git pull
 git merge dev
-# 1. sửa "theme_version" trong config/settings_schema.json (vd 1.1.0)
-# 2. thêm mục vào release-notes.md
+# 1. bump "theme_version" in config/settings_schema.json (e.g. 1.1.0)
+# 2. add an entry at the top of release-notes.md
 git commit -am "chore(release): v1.1.0"
-git tag -a v1.1.0 -m "Mô tả ngắn"
+git tag -a v1.1.0 -m "Short description"
 git push && git push --tags
 ```
 
-Store tự cập nhật trong vài giây. Kiểm tra lại trang chủ, trang sản phẩm, giỏ hàng trên desktop và mobile.
+The store updates within seconds. Re-check home, product, collection and cart pages on desktop and mobile.
 
-## Quay lui
+## Rolling back
 
-| Tình huống | Cách làm |
+| Situation | Command |
 |---|---|
-| Sửa file chưa commit, muốn bỏ | `git restore <file>` hoặc `git restore .` |
-| Hoàn tác một commit đã lên live | `git revert <commit>` rồi `git push` |
-| Lấy lại một file từ bản cũ | `git checkout v1.0.0 -- sections/header.liquid` |
-| Xem code tại một mốc | `git checkout v1.0.0` … `git checkout main` |
-| Khẩn cấp | Admin → Themes → Publish lại theme backup |
+| Uncommitted edits you want to drop | `git restore <file>` or `git restore .` |
+| Undo a commit that is already live | `git revert <commit>` then `git push` |
+| Restore one file from an older version | `git checkout v1.0.0 -- sections/header.liquid` |
+| Inspect the code at a tag | `git checkout v1.0.0` … `git checkout main` |
+| Emergency | Admin → Themes → Publish the backup theme |
 
-## Quy ước
+## Conventions
 
-- Commit message: `feat:` `fix:` `style:` `chore:` `docs:` + phạm vi trong ngoặc, ví dụ `fix(cart): …`. Mỗi commit một mục đích.
-- Version toàn bộ theme, kể cả `templates/*.json` và `config/settings_data.json`. `.gitignore` chỉ bỏ `.shopify/`, file hệ điều hành, file nén.
-- Ảnh trong template phải nằm ở Admin → Content → Files; tham chiếu `shopify://shop_images/<ten-file>`.
-- Chỉnh gì trong Theme Editor trên live thì Shopify tự commit vào `main`; trước khi làm việc local luôn `git pull`.
-- Giữ nguyên ID section/block trong `templates/*.json` (cấu hình merchant phụ thuộc vào ID).
-- Theme check: 2 lỗi `UnknownFilter` và vài warning là của Horizon gốc, bỏ qua.
-- Mỗi lần publish bản mới: tăng `theme_version`, ghi `release-notes.md`, gắn tag.
+- Commit messages: `feat:` `fix:` `style:` `chore:` `docs:` with a scope, e.g. `fix(cart): …`. One purpose per commit. English only.
+- Everything in the repo and on the storefront is written in English.
+- Version the whole theme, including `templates/*.json` and `config/settings_data.json`. `.gitignore` only excludes `.shopify/`, OS files and archives.
+- Images referenced from templates must exist in Admin → Content → Files, referenced as `shopify://shop_images/<file>`.
+- Edits made in the Theme Editor on the live theme are committed to `main` by Shopify; always `git pull` before working locally.
+- Keep section/block IDs in `templates/*.json` stable — merchant settings depend on them.
+- Theme check: the 2 `UnknownFilter` errors and a few warnings come from upstream Horizon; ignore them.
+- Every release: bump `theme_version`, update `release-notes.md`, add a tag.

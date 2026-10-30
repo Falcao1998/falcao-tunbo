@@ -1,6 +1,6 @@
 # Theme authoring guide
 
-> TUNBO: quy trình Git/phát hành xem `WORKFLOW.md`. Theme này fork từ Horizon 4.3.0.
+> TUNBO: see `WORKFLOW.md` for the Git and release process. This theme is a fork of Horizon 4.3.0.
 
 Use this guide when editing this theme. It describes the technical contracts for
 layouts, templates, sections, blocks, snippets, settings, styles, and components.

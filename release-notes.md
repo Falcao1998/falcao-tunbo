@@ -2,9 +2,9 @@
 
 ## 1.0.0 — 2026-10-30
 
-- Khởi tạo từ Horizon 4.3.0, đổi tên theme TUNBO.
-- Trang chủ: đặt ảnh hero `baby-summer-swim.jpg`.
-- Thêm WORKFLOW.md (quy trình Git + Shopify GitHub integration).
+- Initial fork of Horizon 4.3.0, renamed to TUNBO.
+- Home: set hero image `baby-summer-swim.jpg`.
+- Added WORKFLOW.md (Git + Shopify GitHub integration process).
 
 ---
 
