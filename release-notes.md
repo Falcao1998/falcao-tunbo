@@ -1,3 +1,15 @@
+# TUNBO
+
+## 1.0.0 — 2026-10-30
+
+- Khởi tạo từ Horizon 4.3.0, đổi tên theme TUNBO.
+- Trang chủ: đặt ảnh hero `baby-summer-swim.jpg`.
+- Thêm WORKFLOW.md (quy trình Git + Shopify GitHub integration).
+
+---
+
+# Horizon (upstream)
+
 # Release Notes - Version 4.3.0
 
 Product disclosures are now shown only to buyers in the jurisdiction scoped by the disclosure. This update also includes several bug fixes to cart functionality, carousel usability, and information on pickup location availabilities.
